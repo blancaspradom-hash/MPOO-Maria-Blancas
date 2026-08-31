@@ -2,6 +2,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 
+// 1. Clase Secundaria para Composición
 class Bateria {
     private final String tipo;
     private final String fabricante;
@@ -27,6 +28,7 @@ class Bateria {
     }
 }
 
+// 2. Clase Robot
 class Robot {
     private static int totalRobots = 0;
 
@@ -42,6 +44,7 @@ class Robot {
         this.velocidad = 0.0;
         this.distanciaRecorrida = 0.0;
         this.bateria = bateria;
+        
         totalRobots++;
     }
 
@@ -61,7 +64,7 @@ class Robot {
         if (this.bateria.getNivelCarga() <= 0) {
             return;
         }
-        double tiempo = 2.0 + random.nextDouble() * 8.0;
+        double tiempo = 2.0 + random.nextDouble() * 8.0; 
         double avance = this.velocidad * tiempo;
         this.distanciaRecorrida += avance;
 
@@ -94,13 +97,15 @@ class Robot {
     }
 }
 
+// 3. Clase Principal
 public class BattleBot {
     public static void main(String[] args) {
         Random random = new Random();
 
-        Robot robot1 = new Robot("Ares", new Bateria("LiPo", "RoboTech", 100.0));
-        Robot robot2 = new Robot("Zeus", new Bateria("Li-Ion", "PowerBot", 90.0));
-        Robot robot3 = new Robot("Titan", new Bateria("LiPo", "EnergyX", 100.0));
+        // Nombres actualizados: Sofia, Jose y Susana
+        Robot robot1 = new Robot("Sofia", new Bateria("LiPo", "RoboTech", 100.0));
+        Robot robot2 = new Robot("Jose", new Bateria("Li-Ion", "PowerBot", 90.0));
+        Robot robot3 = new Robot("Susana", new Bateria("LiPo", "EnergyX", 100.0));
 
         System.out.println("=======================================================");
         System.out.println("Robots participantes en la batalla: " + Robot.getTotalRobots());
@@ -125,8 +130,9 @@ public class BattleBot {
         System.out.println(robot3);
 
         System.out.println("\n--- EXPERIMENTACIÓN CON REFERENCIAS E IGUALDAD ---");
-        Robot robotFavorito = robot1;
-        Robot robot2Copia = new Robot("Zeus", new Bateria("Li-Ion", "PowerBot", 90.0));
+        
+        Robot robotFavorito = robot1; 
+        Robot robot2Copia = new Robot("Jose", new Bateria("Li-Ion", "PowerBot", 90.0));
 
         System.out.println("robot1.equals(robotFavorito): " + robot1.equals(robotFavorito));
         System.out.println("robot1.equals(robot2Copia): " + robot1.equals(robot2Copia));
