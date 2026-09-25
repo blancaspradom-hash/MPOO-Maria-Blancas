@@ -1,10 +1,5 @@
 import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
 import java.util.*;
-import java.util.concurrent.*;
-import java.util.regex.*;
 
 class Result {
 
@@ -46,13 +41,12 @@ public class Solution {
 
     public static void main(String[] args) throws IOException {
 
-        BufferedReader bufferedReader =
-                new BufferedReader(new InputStreamReader(System.in));
-
-        BufferedWriter bufferedWriter =
-                new BufferedWriter(
-                        new FileWriter(System.getenv("OUTPUT_PATH"))
-                );
+        try (BufferedReader bufferedReader =
+                 new BufferedReader(new InputStreamReader(System.in));
+             BufferedWriter bufferedWriter =
+                 new BufferedWriter(
+                     new FileWriter(System.getenv("OUTPUT_PATH"))
+                 )) {
 
         String linea = bufferedReader.readLine();
 
@@ -77,7 +71,6 @@ public class Solution {
 
         bufferedWriter.newLine();
 
-        bufferedReader.close();
-        bufferedWriter.close();
+        }
     }
 }

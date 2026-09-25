@@ -1,10 +1,4 @@
 import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.regex.*;
 
 class Result {
 
@@ -52,25 +46,19 @@ class Result {
 
 }
 
-public class Solution {
+public class Solution2 {
     public static void main(String[] args) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")))) {
+            String mensaje = bufferedReader.readLine();
+            String alfabetoInterior = bufferedReader.readLine();
+            int posicionInicial = Integer.parseInt(bufferedReader.readLine().trim());
+            int intervaloRotacion = Integer.parseInt(bufferedReader.readLine().trim());
 
-        String mensaje = bufferedReader.readLine();
+            String result = Result.cifrarMensaje(mensaje, alfabetoInterior, posicionInicial, intervaloRotacion);
 
-        String alfabetoInterior = bufferedReader.readLine();
-
-        int posicionInicial = Integer.parseInt(bufferedReader.readLine().trim());
-
-        int intervaloRotacion = Integer.parseInt(bufferedReader.readLine().trim());
-
-        String result = Result.cifrarMensaje(mensaje, alfabetoInterior, posicionInicial, intervaloRotacion);
-
-        bufferedWriter.write(result);
-        bufferedWriter.newLine();
-
-        bufferedReader.close();
-        bufferedWriter.close();
+            bufferedWriter.write(result);
+            bufferedWriter.newLine();
+        }
     }
 }
