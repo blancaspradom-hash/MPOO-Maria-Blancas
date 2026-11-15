@@ -2,8 +2,12 @@ package mx.unam.fi.smartvend.application;
 
 import mx.unam.fi.smartvend.api.dto.*;
 import mx.unam.fi.smartvend.domain.*;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
+@Service
 public class MaquinaService {
 
     private final Inventario inventario;
@@ -12,8 +16,8 @@ public class MaquinaService {
 
     public MaquinaService(
             Inventario inventario,
-            Monedero monederoEfectivo,
-            Monedero monederoTarjeta
+            @Qualifier("monederoEfectivo") Monedero monederoEfectivo,
+            @Qualifier("monederoTarjeta") Monedero monederoTarjeta
     ) {
         this.inventario = inventario;
         this.monederoEfectivo = monederoEfectivo;
@@ -44,9 +48,10 @@ public class MaquinaService {
 
         ProductoInventario pi = opt.get();
         if (pi.getExistencias() <= 0) return new ResultadoCompra(EstadoCompra.SIN_EXISTENCIAS, pi.getProducto(), 0.0);
-        if (solicitud.getCantidadRecibida() < pi.getPrecio()) return new ResultadoCompra(EstadoCompra.SIN_FONDOS_SUFICIENTES, pi.getProducto(), 0.0);
+        if (solicitud.getCantidadRecibida() < pi.getPrecio()) return new ResultadoCompra(EstadoCompra.PAGO_INSUFICIENTE, pi.getProducto(), 0.0);
 
-        Monedero monederoSeleccionado = (MetodoPago.TARJETA.name().equals(solicitud.getMetodoPago()))
+        Monedero monederoSeleccionado;
+        monederoSeleccionado = (solicitud.getMetodoPago() == MetodoPago.TARJETA) 
                 ? monederoTarjeta 
                 : monederoEfectivo;
 
@@ -59,7 +64,7 @@ public class MaquinaService {
             inventario.reabastecer(solicitud.getCodigoProducto(), 1);
             EstadoCompra estado = (cobro.getEstado() == EstadoCobro.SIN_FONDOS_SUFICIENTES) 
                     ? EstadoCompra.SIN_FONDOS_SUFICIENTES 
-                    : EstadoCompra.SIN_FONDOS_SUFICIENTES;
+                    : EstadoCompra.PAGO_INSUFICIENTE;
             return new ResultadoCompra(estado, pi.getProducto(), 0.0);
         }
 

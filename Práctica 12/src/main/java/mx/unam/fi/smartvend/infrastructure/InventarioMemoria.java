@@ -1,8 +1,8 @@
 package mx.unam.fi.smartvend.infrastructure;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
+
+import org.springframework.stereotype.Repository;
 
 import mx.unam.fi.smartvend.domain.Inventario;
 import mx.unam.fi.smartvend.domain.Producto;
@@ -11,8 +11,9 @@ import mx.unam.fi.smartvend.domain.ResultadoEntrega;
 import mx.unam.fi.smartvend.domain.ResultadoReabastecimiento;
 import mx.unam.fi.smartvend.domain.ResultadoRegistro;
 
+@Repository
 public class InventarioMemoria implements Inventario {
-    private final Map<String, ProductoInventario> map = new HashMap<>();
+    private final java.util.Map<String, ProductoInventario> map = new java.util.HashMap<>();
 
     @Override
     public ResultadoRegistro registrarProducto(Producto producto, double precio) {

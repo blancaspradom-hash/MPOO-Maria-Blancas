@@ -6,7 +6,7 @@ public class Producto {
     private final String codigo;
     private final String nombre;
     private final LocalDate fechaCaducidad;
-    private final String categoria;
+    private final CategoriaProducto categoria;
 
     public Producto(Builder builder) {
         this.codigo = builder.codigo;
@@ -18,18 +18,18 @@ public class Producto {
     public String getCodigo() { return codigo; }
     public String getNombre() { return nombre; }
     public LocalDate getFechaCaducidad() { return fechaCaducidad; }
-    public String getCategoria() { return categoria; }
+    public CategoriaProducto getCategoria() { return categoria; }
 
     public static class Builder {
         private String codigo;
         private String nombre;
         private LocalDate fechaCaducidad;
-        private String categoria;
+        private CategoriaProducto categoria;
 
         public Builder codigo(String codigo) { this.codigo = codigo; return this; }
         public Builder nombre(String nombre) { this.nombre = nombre; return this; }
         public Builder fechaCaducidad(LocalDate fechaCaducidad) { this.fechaCaducidad = fechaCaducidad; return this; }
-        public Builder categoria(String categoria) { this.categoria = categoria; return this; }
+        public Builder categoria(CategoriaProducto categoria) { this.categoria = categoria; return this; }
 
         public Producto build() {
             return new Producto(this);

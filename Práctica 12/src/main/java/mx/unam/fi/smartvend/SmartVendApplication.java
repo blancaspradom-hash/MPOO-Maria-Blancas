@@ -1,8 +1,11 @@
 package mx.unam.fi.smartvend;
 
-public class SmartVendApplication {
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
+public class SmartVendApplication {
     public static void main(String[] args) {
-        System.out.println("SmartVendApplication started");
+        SpringApplication.run(SmartVendApplication.class, args);
     }
 }
