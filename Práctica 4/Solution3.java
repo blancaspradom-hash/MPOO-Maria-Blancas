@@ -1,7 +1,12 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.List;
 
-class Solution {
+class Solution3 {
 
     static class Resultado {
 
@@ -114,7 +119,7 @@ class Solution {
 
     public static void main(String[] args) throws IOException {
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")))) {
+             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));) {
 
             int capacidad = Integer.parseInt(bufferedReader.readLine().trim());
             int nOperaciones = Integer.parseInt(bufferedReader.readLine().trim());

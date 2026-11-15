@@ -1,17 +1,11 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 class Result {
 
-    /*
-     * Complete the 'cifrarMensaje' function below.
-     *
-     * The function is expected to return a STRING.
-     * The function accepts following parameters:
-     *  1. STRING mensaje
-     *  2. STRING alfabetoInterior
-     *  3. INTEGER posicionInicial
-     *  4. INTEGER intervaloRotacion
-     */
 
     public static String cifrarMensaje(String mensaje, String alfabetoInterior, int posicionInicial, int intervaloRotacion) {
         StringBuilder cifrado = new StringBuilder();
@@ -49,7 +43,7 @@ class Result {
 public class Solution2 {
     public static void main(String[] args) throws IOException {
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")))) {
+             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));) {
             String mensaje = bufferedReader.readLine();
             String alfabetoInterior = bufferedReader.readLine();
             int posicionInicial = Integer.parseInt(bufferedReader.readLine().trim());

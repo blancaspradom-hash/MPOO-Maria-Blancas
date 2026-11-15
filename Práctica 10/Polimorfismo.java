@@ -40,7 +40,7 @@ class EntradaEnvioDTO {
         this.distanciaKm = distanciaKm;
         this.servicios =
                 Collections.unmodifiableList(
-                        new ArrayList<>(servicios)
+                        new ArrayList<>(servicios == null ? Collections.emptyList() : servicios)
                 );
     }
 
@@ -66,7 +66,7 @@ class EntradaEnvioDTO {
 }
 
 /* =========================================================
-   DESARROLLA TU SOLUCION AQUI
+    DESARROLLA TU SOLUCION AQUI
    ========================================================= */
 
 abstract class Envio implements ServicioEnvio {
@@ -273,8 +273,8 @@ public class Polimorfismo {
             throw new IllegalArgumentException("El destinatario no puede estar vacio");
         }
 
-        double pesoKg = Double.parseDouble(partes[2].trim());
-        double distanciaKm = Double.parseDouble(partes[3].trim());
+        double pesoKg = parseDoubleFlexible(partes[2]);
+        double distanciaKm = parseDoubleFlexible(partes[3]);
 
         List<ServicioAdicional> servicios = convertirServicios(partes[4]);
 
@@ -285,6 +285,36 @@ public class Polimorfismo {
                 distanciaKm,
                 servicios
         );
+    }
+
+    private static double parseDoubleFlexible(String valor) {
+        if (valor == null) {
+            throw new IllegalArgumentException("El valor numerico no puede ser nulo");
+        }
+
+        String texto = valor.trim().replace(" ", "");
+
+        if (texto.isEmpty()) {
+            throw new IllegalArgumentException("El valor numerico no puede estar vacio");
+        }
+
+        if (texto.contains(",") && texto.contains(".")) {
+            int ultimoSeparadorDecimal = Math.max(texto.lastIndexOf(','), texto.lastIndexOf('.'));
+            if (ultimoSeparadorDecimal == -1) {
+                return Double.parseDouble(texto);
+            }
+
+            char ultimoDecimal = texto.charAt(ultimoSeparadorDecimal);
+            if (ultimoDecimal == ',') {
+                texto = texto.replace(".", "").replace(',', '.');
+            } else {
+                texto = texto.replace(",", "");
+            }
+        } else if (texto.contains(",")) {
+            texto = texto.replace(',', '.');
+        }
+
+        return Double.parseDouble(texto);
     }
 
     private static List<ServicioAdicional> convertirServicios(String valor) {

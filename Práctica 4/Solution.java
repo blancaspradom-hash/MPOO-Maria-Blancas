@@ -1,15 +1,11 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.Arrays;
 
 class Result {
-
-    /*
-     * Complete the 'detectarZonaAjuste' function below.
-     *
-     * The function is expected to return an INTEGER_ARRAY.
-     * The function accepts INTEGER_ARRAY vagones as parameter.
-     */
-
     public static int[] detectarZonaAjuste(int[] vagones) {
         int n = vagones.length;
         int[] ordenados = vagones.clone();
@@ -43,10 +39,7 @@ public class Solution {
 
         try (BufferedReader bufferedReader =
                  new BufferedReader(new InputStreamReader(System.in));
-             BufferedWriter bufferedWriter =
-                 new BufferedWriter(
-                     new FileWriter(System.getenv("OUTPUT_PATH"))
-                 )) {
+             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out))) {
 
         String linea = bufferedReader.readLine();
 
